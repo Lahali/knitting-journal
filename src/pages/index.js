@@ -1,8 +1,9 @@
 import Link from "next/link"
+import { initFirebase } from "../../firebase/firebase"
 
 export default function Home() {
   return (
-    <div className="h-screen justify-center items-center flex flex-col p-5">
+    <div className="flex flex-col items-center justify-center h-screen p-5">
       <h1 className="text-5xl">Welcome to your project notebook!</h1>
       <div className="flex flex-row gap-2">
         <p>New around here?</p>
