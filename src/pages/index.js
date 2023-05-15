@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { initFirebase } from "../../firebase/firebase"
+import { initFirebase } from "../../lib/firebase"
 
 export default function Home() {
   return (

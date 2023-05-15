@@ -6,7 +6,10 @@ const AuthContext = createContext({})
 // define provider component
 export const AuthContextProvider = ({ children }) => {
   // return provider with AuthContext as value
-  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>
+  const user = { login: true }
+  return (
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+  )
 }
 
 // define hook to consume AuthContext
