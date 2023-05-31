@@ -1,6 +1,6 @@
 import { useAuth } from "@component/context/authContext"
 import { useRouter } from "next/router"
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 
 export const withAuth = (WrappedComponent) => {
   const Wrapper = () => {

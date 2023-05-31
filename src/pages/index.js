@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import welcome from "../assets/images/Crochet-rafiki.svg"
 import illustration from "../assets/images/crochet-round.svg"
 
 export default function Home() {
