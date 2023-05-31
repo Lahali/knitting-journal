@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { useAuth } from "../../context/authContext"
+import { useState } from "react"
+import { useRouter } from "next/router"
 
 const Register = () => {
   const { signup } = useAuth()
@@ -11,17 +13,27 @@ const Register = () => {
     reset,
   } = useForm()
 
-  // const { email, name, password } = data
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
-    signup(data.email, data.password)
-    reset()
+  const [user, setUser] = useState()
+
+  const router = useRouter()
+
+  const handleSignup = handleSubmit(async (data) => {
+    try {
+      if (!data.name || !data.email || data.password) {
+        return
+      }
+      await signup(data.email, data.password)
+      router.push("/myProjects")
+    } catch (error) {
+      console.log(error)
+    }
   })
+
   return (
     <div className="flex items-center justify-center h-screen">
       <form
         className="flex flex-col items-center justify-center bg-[#FFEEE7] py-5 w-4/6 rounded-lg"
-        onSubmit={onSubmit}
+        onSubmit={handleSignup}
       >
         <h1 className="my-4 text-5xl">Register</h1>
         <div className="flex flex-col w-4/6 gap-1 my-5">
@@ -31,9 +43,10 @@ const Register = () => {
             placeholder="Name"
             type="text"
             className="bg-[#D9D9D9] p-3 rounded"
-            error={errors.name && true}
+            error={errors.name && "true"}
             {...register("name")}
           />
+          {errors.name && <p className="text-red-500">Name is required</p>}
         </div>
         <div className="flex flex-col w-4/6 gap-1 my-5">
           <label htmlFor="email">Write your email</label>
@@ -42,9 +55,10 @@ const Register = () => {
             placeholder="Email"
             type="email"
             className="bg-[#D9D9D9] p-3 rounded"
-            error={errors.email && true}
+            error={errors.email && "true"}
             {...register("email")}
           />
+          {errors.email && <p className="text-red-500">Email is required</p>}
         </div>
         <div className="flex flex-col w-4/6 gap-1 my-5">
           <label htmlFor="password">Write your password</label>
@@ -53,24 +67,21 @@ const Register = () => {
             placeholder="Password"
             type="password"
             className="bg-[#D9D9D9] p-3 rounded"
+            error={errors.password && "true"}
             {...register("password")}
           />
+          {errors.password && (
+            <p className="text-red-500">Password is required</p>
+          )}
         </div>
-        {/* <div className="flex flex-col w-4/6 gap-1 my-5">
-          <label htmlFor="passwordValidation">Repeat your password</label>
-          <input
-            placeholder="Repeat password"
-            type="password"
-            className="bg-[#D9D9D9] p-3 rounded"
-            {...register("passwordValidation")}
-          />
-        </div> */}
+
         <button
           className="bg-[#A3342C] text-[#FFEEE7] p-3 my-3 rounded w-4/6 hover:bg-[#7C2923]"
           type="submit"
         >
           Submit
         </button>
+
         <div className="flex flex-row gap-2 my-3 text-2xl">
           <p>Do you have an account?</p>
           <Link href="/login" className="hover:text-[#7C2923] font-semibold">
