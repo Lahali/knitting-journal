@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useForm } from "react-hook-form"
-import { useAuth } from "../../context/authContext"
+import { useAuth } from "../context/authContext"
 import { useRouter } from "next/router"
 
 const Login = () => {
@@ -39,7 +39,7 @@ const Login = () => {
           <input
             placeholder="Email"
             type="email"
-            className={`bg-[#D9D9D9] p-3 rounded ${
+            className={`bg-[#D9D9D9] p-3 rounded border ${
               errors.email ? "border-red-500" : "border-[#D9D9D9]"
             }`}
             error={errors.email && "true"}
@@ -52,7 +52,9 @@ const Login = () => {
           <input
             placeholder="Password"
             type="password"
-            className="bg-[#D9D9D9] p-3 rounded"
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.email ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
             error={errors.password && "true"}
             {...register("password", { required: true })}
           />

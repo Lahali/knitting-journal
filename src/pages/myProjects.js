@@ -1,7 +1,8 @@
 import React from "react"
+import { withAuth } from "@component/utils/withAuth"
 
 const myProjects = () => {
   return <div>myProjects</div>
 }
 
-export default myProjects
+export default withAuth(myProjects)

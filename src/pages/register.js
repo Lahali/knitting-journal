@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useForm } from "react-hook-form"
-import { useAuth } from "../../context/authContext"
+import { useAuth } from "../context/authContext"
 import { useState } from "react"
 import { useRouter } from "next/router"
 
@@ -39,36 +39,39 @@ const Register = () => {
         <div className="flex flex-col w-4/6 gap-1 my-5">
           <label htmlFor="name">Write your name</label>
           <input
-            required
             placeholder="Name"
             type="text"
-            className="bg-[#D9D9D9] p-3 rounded"
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.email ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
             error={errors.name && "true"}
-            {...register("name")}
+            {...register("name", { required: true })}
           />
           {errors.name && <p className="text-red-500">Name is required</p>}
         </div>
         <div className="flex flex-col w-4/6 gap-1 my-5">
           <label htmlFor="email">Write your email</label>
           <input
-            required
             placeholder="Email"
             type="email"
-            className="bg-[#D9D9D9] p-3 rounded"
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.email ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
             error={errors.email && "true"}
-            {...register("email")}
+            {...register("email", { required: true })}
           />
           {errors.email && <p className="text-red-500">Email is required</p>}
         </div>
         <div className="flex flex-col w-4/6 gap-1 my-5">
           <label htmlFor="password">Write your password</label>
           <input
-            required
             placeholder="Password"
             type="password"
-            className="bg-[#D9D9D9] p-3 rounded"
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.email ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
             error={errors.password && "true"}
-            {...register("password")}
+            {...register("password", { required: true })}
           />
           {errors.password && (
             <p className="text-red-500">Password is required</p>
