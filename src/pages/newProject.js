@@ -1,16 +1,40 @@
 import { useForm } from "react-hook-form"
-import InputGroup from "@component/components/InputGroup"
-import SelectGroup from "@component/components/SelectGroup"
+import { projectsRef } from "../../lib/firebase"
+import { withAuth } from "@component/utils/withAuth"
+import { addDoc } from "firebase/firestore"
+import { useAuth } from "@component/context/authContext"
 
 // TODO - lo hacemos modal??
 const Newproject = () => {
-  const { handleSubmit, register } = useForm()
-  const onSubmit = (data) => console.log("data", data)
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm()
+
+  const { currentUser } = useAuth()
+
+  const onSubmitProject = handleSubmit(async (data) => {
+    try {
+      if (!data.title || !data.technique || !data.yarn || !data.needles) {
+        return
+      }
+      await addDoc(projectsRef, {
+        ...data,
+        userId: currentUser.uid,
+      })
+      console.log("data", data)
+      reset()
+    } catch (error) {
+      console.log(error)
+    }
+  })
 
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmitProject)}
         className="flex flex-col items-center justify-center bg-[#FFEEE7] py-5 w-4/6 rounded-lg"
       >
         <h1 className="my-4 text-5xl">New Project</h1>
@@ -20,22 +44,32 @@ const Newproject = () => {
           <input
             placeholder="title"
             type="text"
-            className="bg-[#D9D9D9] p-3 rounded"
-            {...register("title")}
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.email ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
+            error={errors.title && "true"}
+            {...register("title", { required: true })}
           />
+          {errors.title && <p className="text-red-500">Title is required</p>}
         </div>
         {/* ==> SELECT INPUT */}
         <div className="flex flex-col w-4/6 gap-1 my-5">
           <label htmlFor="technique">Choose your technique</label>
           <select
             id="technique"
-            className="bg-[#D9D9D9] p-3 rounded"
-            {...register("technique")}
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.technique ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
+            error={errors.technique && "true"}
+            {...register("technique", { required: true })}
           >
             <option value="none">Choose an option</option>
             <option value="crochet">Crochet</option>
             <option value="knit">Knit</option>
           </select>
+          {errors.technique && (
+            <p className="text-red-500">Technique is required</p>
+          )}
         </div>
         {/* ==> YARN INPUT  */}
         <div className="flex flex-col w-4/6 gap-1 my-5">
@@ -43,9 +77,13 @@ const Newproject = () => {
           <input
             placeholder="Yarn"
             type="text"
-            className="bg-[#D9D9D9] p-3 rounded"
-            {...register("yarn")}
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.yarn ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
+            error={errors.yarn && "true"}
+            {...register("yarn", { required: true })}
           />
+          {errors.yarn && <p className="text-red-500">Yarn is required</p>}
         </div>
         {/* ==> NEEDLES INPUT */}
         <div className="flex flex-col w-4/6 gap-1 my-5">
@@ -53,9 +91,15 @@ const Newproject = () => {
           <input
             placeholder="Needles"
             type="text"
-            className="bg-[#D9D9D9] p-3 rounded"
-            {...register("needles")}
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.needles ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
+            error={errors.needles && "true"}
+            {...register("needles", { required: true })}
           />
+          {errors.needles && (
+            <p className="text-red-500">Needles is required</p>
+          )}
         </div>
         <button
           type="submit"
@@ -68,4 +112,4 @@ const Newproject = () => {
   )
 }
 
-export default Newproject
+export default withAuth(Newproject)

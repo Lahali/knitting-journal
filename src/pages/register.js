@@ -10,7 +10,6 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm()
 
   const [user, setUser] = useState()
