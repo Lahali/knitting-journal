@@ -34,8 +34,8 @@ const Register = () => {
         className="flex flex-col items-center justify-center bg-[#FFEEE7] py-5 w-4/6 rounded-lg"
         onSubmit={handleSignup}
       >
-        <h1 className="my-4 text-5xl">Register</h1>
-        <div className="flex flex-col w-4/6 gap-1 my-5">
+        <h1 className="my-4 md:text-5xl lg:text-5xl">Register</h1>
+        <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
           <label htmlFor="name">Write your name</label>
           <input
             placeholder="Name"
@@ -48,7 +48,7 @@ const Register = () => {
           />
           {errors.name && <p className="text-red-500">Name is required</p>}
         </div>
-        <div className="flex flex-col w-4/6 gap-1 my-5">
+        <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
           <label htmlFor="email">Write your email</label>
           <input
             placeholder="Email"
@@ -61,7 +61,7 @@ const Register = () => {
           />
           {errors.email && <p className="text-red-500">Email is required</p>}
         </div>
-        <div className="flex flex-col w-4/6 gap-1 my-5">
+        <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
           <label htmlFor="password">Write your password</label>
           <input
             placeholder="Password"
@@ -78,13 +78,13 @@ const Register = () => {
         </div>
 
         <button
-          className="bg-[#A3342C] text-[#FFEEE7] p-3 my-3 rounded w-4/6 hover:bg-[#7C2923]"
+          className="bg-[#A3342C] text-2xl md:text-3xl lg:text-3xl text-[#FFEEE7] p-3 my-3 rounded w-4/6 hover:bg-[#7C2923]"
           type="submit"
         >
           Submit
         </button>
 
-        <div className="flex flex-row gap-2 my-3 text-2xl">
+        <div className="flex flex-row gap-2 my-3 text-xl md:text-2xl lg:text-2xl">
           <p>Do you have an account?</p>
           <Link href="/login" className="hover:text-[#7C2923] font-semibold">
             Signin

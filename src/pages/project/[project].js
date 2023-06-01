@@ -1,7 +1,9 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore"
 import React, { useState } from "react"
-import { dataBase, projectsRef } from "../../../lib/firebase"
+import { dataBase } from "../../../lib/firebase"
 import { useRouter } from "next/router"
+import add from "../../assets/icons/addIcon.svg"
+import Image from "next/image"
 
 const Project = ({ singleProject }) => {
   const { query } = useRouter()

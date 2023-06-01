@@ -33,8 +33,8 @@ const Login = () => {
         className="flex flex-col items-center justify-center bg-[#FFEEE7] py-5 w-4/6 rounded-lg"
         onSubmit={handleLogin}
       >
-        <h1 className="my-4 text-5xl">Signin</h1>
-        <div className="flex flex-col w-4/6 gap-1 my-5">
+        <h1 className="my-4 md:text-5xl lg:text-5xl">Login</h1>
+        <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
           <label htmlFor="email">Write your email</label>
           <input
             placeholder="Email"
@@ -47,7 +47,7 @@ const Login = () => {
           />
           {errors.email && <p className="text-red-500">Email is required</p>}
         </div>
-        <div className="flex flex-col w-4/6 gap-1 my-5">
+        <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
           <label htmlFor="password">Write your password</label>
           <input
             placeholder="Password"
@@ -63,12 +63,12 @@ const Login = () => {
           )}
         </div>
         <button
-          className="bg-[#A3342C] text-[#FFEEE7] p-3 my-3 rounded w-4/6 hover:bg-[#7C2923]"
+          className="bg-[#A3342C] text-[#FFEEE7] p-3 my-3 rounded w-4/6 hover:bg-[#7C2923] text-2xl md:text-3xl lg:text-3xl"
           type="submit"
         >
-          Signin
+          Login
         </button>
-        <div className="flex flex-row gap-2 my-3 text-2xl">
+        <div className="flex flex-row gap-2 my-3 text-xl md:text-2xl lg:text-2xl">
           <p>Don't have an account?</p>
           <Link href="/register" className="hover:text-[#7C2923] font-semibold">
             Create one
