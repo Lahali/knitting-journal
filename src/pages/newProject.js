@@ -3,7 +3,6 @@ import { projectsRef } from "../../lib/firebase"
 import { withAuth } from "@component/utils/withAuth"
 import { addDoc } from "firebase/firestore"
 import { useAuth } from "@component/context/authContext"
-import Link from "next/link"
 import { useRouter } from "next/router"
 
 // TODO - lo hacemos modal??

@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   setPersistence,
   browserLocalPersistence,
+  signOut,
 } from "firebase/auth"
 import { auth } from "../../lib/firebase"
 
@@ -40,9 +41,13 @@ export const AuthContextProvider = ({ children }) => {
   const login = (email, password) =>
     signInWithEmailAndPassword(auth, email, password)
 
+  const logout = () => {
+    signOut(auth)
+  }
+
   // return provider with AuthContext as value
   return (
-    <AuthContext.Provider value={{ signup, login, currentUser }}>
+    <AuthContext.Provider value={{ signup, login, logout, currentUser }}>
       {children}
     </AuthContext.Provider>
   )

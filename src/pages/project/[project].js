@@ -33,7 +33,9 @@ const Project = ({ singleProject }) => {
       <p>{singleProject.needles}</p>
       <p>{singleProject.notes}</p>
       <div className="flex flex-col">
-        <h1 className="text-5xl">{counter}</h1>
+        <h1 className="text-5xl">
+          {singleProject.counter > 0 ? singleProject.counter : counter}
+        </h1>
         <button
           onClick={handleIncrease}
           type="button"
