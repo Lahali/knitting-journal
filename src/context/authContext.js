@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
 } from "firebase/auth"
 import { auth } from "../../lib/firebase"
 
@@ -13,12 +15,23 @@ const AuthContext = createContext()
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
 
+  // currentUser is used for the protected routes and also to use its uid
   useEffect(() => {
     const unsusbscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user)
     })
     return () => unsusbscribe()
   }, [])
+
+  useEffect(() => {
+    if (currentUser) {
+      setPersistence(auth, browserLocalPersistence)
+        .then(() => {})
+        .catch((error) => {
+          console.log("error with firebase persistence", error)
+        })
+    }
+  }, [currentUser])
 
   const signup = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)

@@ -3,6 +3,8 @@ import { projectsRef } from "../../lib/firebase"
 import { withAuth } from "@component/utils/withAuth"
 import { addDoc } from "firebase/firestore"
 import { useAuth } from "@component/context/authContext"
+import Link from "next/link"
+import { useRouter } from "next/router"
 
 // TODO - lo hacemos modal??
 const Newproject = () => {
@@ -14,6 +16,7 @@ const Newproject = () => {
   } = useForm()
 
   const { currentUser } = useAuth()
+  const router = useRouter()
 
   const onSubmitProject = handleSubmit(async (data) => {
     try {
@@ -24,7 +27,7 @@ const Newproject = () => {
         ...data,
         userId: currentUser.uid,
       })
-      console.log("data", data)
+      router.push("/myProjects")
       reset()
     } catch (error) {
       console.log(error)
@@ -100,6 +103,20 @@ const Newproject = () => {
           {errors.needles && (
             <p className="text-red-500">Needles is required</p>
           )}
+        </div>
+        {/* ==> NOTES TEXTAREA */}
+        <div className="flex flex-col w-4/6 gap-1 my-5">
+          <label htmlFor="notes">Add some notes</label>
+          <textarea
+            placeholder="notes"
+            rows="4"
+            className={`bg-[#D9D9D9] p-3 rounded border ${
+              errors.notes ? "border-red-500" : "border-[#D9D9D9]"
+            }`}
+            error={errors.notes && "true"}
+            {...register("notes")}
+          />
+          {errors.notes && <p className="text-red-500">Something went wrong</p>}
         </div>
         <button
           type="submit"
