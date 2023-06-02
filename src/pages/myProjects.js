@@ -24,7 +24,7 @@ const MyProjects = ({ projects }) => {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-between p-6">
+      <div className="flex flex-row items-center justify-between p-6 ">
         <h1 className="text-4xl font-semibold lg:text-5xl">Your projects</h1>
         <button
           onClick={handleLogout}
@@ -33,9 +33,9 @@ const MyProjects = ({ projects }) => {
           <FiLogOut className="text-3xl" />
         </button>
       </div>
-      <div className="flex flex-row h-screen p-8">
-        <div className="flex flex-col w-screen md:w-[50vw] lg:w-[50vw]">
-          <div className="flex flex-wrap max-h-screen overflow-auto">
+      <div className="flex flex-row max-h-screen p-8 ">
+        <div className="relative flex flex-col w-screen md:w-[50vw] lg:w-[50vw]">
+          <div className="flex flex-wrap max-h-[530px] lg:max-h-screen md:max-h-screen overflow-auto">
             {filteredProjects && currentUser ? (
               filteredProjects.map((pro) => (
                 <>
@@ -62,7 +62,10 @@ const MyProjects = ({ projects }) => {
               </Link>
             )}
           </div>
-          <Link href="/newProject">
+          <Link
+            href="/newProject"
+            className="bg-[#A3342C] text-[#FFEEE7] p-3 w-fit rounded-md ml-3 sticky"
+          >
             <HiOutlinePlus />
           </Link>
         </div>
