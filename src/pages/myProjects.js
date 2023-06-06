@@ -9,10 +9,9 @@ import ProjectCard from "@component/components/ProjectCard"
 import knitting from "../assets/images/Knitting-pana.svg"
 import { HiOutlinePlus } from "react-icons/hi"
 import { FiLogOut } from "react-icons/fi"
-import { useEffect } from "react"
 
 const MyProjects = ({ projects }) => {
-  const { currentUser, logout, loading } = useAuth()
+  const { currentUser, logout } = useAuth()
   const router = useRouter()
   const filteredProjects = currentUser
     ? projects.filter((pro) => pro.userId === currentUser.uid)

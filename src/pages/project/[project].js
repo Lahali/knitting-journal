@@ -1,17 +1,27 @@
 import Image from "next/image"
-import { doc, getDoc, updateDoc } from "firebase/firestore"
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore"
 import React, { useState } from "react"
 import { dataBase } from "../../../lib/firebase"
 import { useRouter } from "next/router"
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi"
 import crochetIlustration from "../../assets/images/Crochet-pana.svg"
+import Modal from "@component/components/Modal"
 
 const Project = ({ singleProject }) => {
   const { query } = useRouter()
   const [counter, setCounter] = useState(0)
+  const router = useRouter()
+  // ==> MODAL ACTION
+  const [openModal, setOpenModal] = useState(false)
 
-  console.log("query", query.project)
+  // ==> DELETE
+  const deleteProject = async () => {
+    const { project } = query
+    await deleteDoc(doc(dataBase, "project", project))
+    router.push("/myProjects")
+  }
 
+  // ==> COUNTER
   const handleIncrease = async () => {
     if (query.project) {
       const projectDocRef = doc(dataBase, "projects", query.project)
@@ -30,6 +40,11 @@ const Project = ({ singleProject }) => {
 
   return (
     <div className="flex flex-row items-center justify-between h-screen p-5">
+      <Modal
+        isOpenModal={openModal}
+        closeModal={() => setOpenModal(false)}
+        deleteProject={deleteProject}
+      />
       <div className="hidden p-10 bg-[#FFEEE7] lg:flex md:flex rounded-full w-fit flex-col  border-[#A5C08B] border-solid border-8">
         <Image
           src={crochetIlustration}
@@ -85,6 +100,12 @@ const Project = ({ singleProject }) => {
           <p>
             <span className="font-bold">Notes:</span> {singleProject.notes}
           </p>
+          <button
+            onClick={() => setOpenModal(!openModal)}
+            className="bg-[#A3342C] text-[#FFEEE7] p-3 mt-5 rounded w-full  hover:bg-[#7C2923] text-3xl"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
