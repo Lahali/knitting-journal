@@ -1,7 +1,13 @@
 import Image from "next/image"
-import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore"
+import {
+  deleteDoc,
+  doc,
+  getDoc,
+  getFirestore,
+  updateDoc,
+} from "firebase/firestore"
 import React, { useState } from "react"
-import { dataBase } from "../../../lib/firebase"
+import { dataBase, app } from "../../../lib/firebase"
 import { useRouter } from "next/router"
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi"
 import crochetIlustration from "../../assets/images/Crochet-pana.svg"
@@ -17,7 +23,9 @@ const Project = ({ singleProject }) => {
   // ==> DELETE
   const deleteProject = async () => {
     const { project } = query
-    await deleteDoc(doc(dataBase, "project", project))
+    const projectDocRef = doc(getFirestore(), "projects", project)
+    await deleteDoc(projectDocRef)
+    console.log("mirando", project)
     router.push("/myProjects")
   }
 
@@ -101,7 +109,7 @@ const Project = ({ singleProject }) => {
             <span className="font-bold">Notes:</span> {singleProject.notes}
           </p>
           <button
-            onClick={() => setOpenModal(!openModal)}
+            onClick={deleteProject}
             className="bg-[#A3342C] text-[#FFEEE7] p-3 mt-5 rounded w-full  hover:bg-[#7C2923] text-3xl"
           >
             Delete
