@@ -12,6 +12,7 @@ import { useRouter } from "next/router"
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi"
 import crochetIlustration from "../../assets/images/Crochet-pana.svg"
 import Modal from "@component/components/Modal"
+import Navbar from "@component/components/Navbar"
 
 const Project = ({ singleProject }) => {
   const { query } = useRouter()
@@ -47,13 +48,14 @@ const Project = ({ singleProject }) => {
   }
 
   return (
-    <div className="flex flex-row items-center justify-between h-screen p-5">
+    <div className="flex flex-row items-center justify-between h-screen ">
+      <Navbar>{singleProject.title}</Navbar>
       <Modal
         isOpenModal={openModal}
         closeModal={() => setOpenModal(false)}
         deleteProject={deleteProject}
       />
-      <div className="hidden p-10 bg-[#FFEEE7] lg:flex md:flex rounded-full w-fit flex-col  border-[#A5C08B] border-solid border-8">
+      <div className="hidden p-10 bg-[#FFEEE7] lg:flex md:flex rounded-full w-fit flex-col  border-[#A5C08B] border-solid border-8 mx-3">
         <Image
           src={crochetIlustration}
           alt="crochet ilustration"
@@ -65,7 +67,7 @@ const Project = ({ singleProject }) => {
           People illustrations by Storyset
         </a>
       </div>
-      <div className="flex flex-col bg-[#F1D3CC] p-10 rounded-md max-w-[400px] border-solid border-[#A3342C] border-8">
+      <div className="flex flex-col bg-[#F1D3CC] p-10 rounded-md max-w-[400px] border-solid border-[#A3342C] border-8 mx-3">
         <div className="flex flex-col items-center justify-center">
           <div className="flex justify-center items-center bg-[#FFEEE7] p-20 rounded-full  w-[80px] h-[80px] my-4">
             <h1 className="text-5xl">

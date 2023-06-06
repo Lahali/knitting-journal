@@ -12,16 +12,17 @@ import { HiOutlinePlus } from "react-icons/hi"
 const MyProjects = ({ projects }) => {
   const { currentUser } = useAuth()
 
+  console.log("user", currentUser)
   const filteredProjects = currentUser
     ? projects.filter((pro) => pro.userId === currentUser.uid)
     : []
 
   return (
     <>
-      <Navbar>Your projects</Navbar>
-      <div className="flex flex-row max-h-screen p-8 ">
-        <div className="relative flex flex-col w-screen md:w-[50vw] lg:w-[50vw]">
-          <div className="flex flex-wrap max-h-[530px] lg:max-h-screen md:max-h-screen overflow-auto">
+      <div className="relative flex flex-row max-h-screen">
+        <Navbar>Your projects</Navbar>
+        <div className="absolute lg:relative md:relative justify-center flex flex-col w-screen md:w-[50vw] lg:w-[50vw]  top-20 p-8">
+          <div className=" flex flex-wrap max-h-[530px] mt-5 lg:max-h-screen md:max-h-screen overflow-auto">
             {filteredProjects && currentUser ? (
               filteredProjects.map((pro) => (
                 <div key={pro.id}>
@@ -40,12 +41,12 @@ const MyProjects = ({ projects }) => {
           </div>
           <Link
             href="/newProject"
-            className="bg-[#A3342C] text-[#FFEEE7] p-3 w-fit rounded-md ml-3 sticky"
+            className="bg-[#A3342C] text-[#FFEEE7] p-3 w-fit rounded-md ml-3 sticky "
           >
             <HiOutlinePlus />
           </Link>
         </div>
-        <div className="hidden md:flex lg:flex flex-col items-center justify-center w-[50vw] ">
+        <div className="hidden md:flex lg:flex flex-col items-center justify-center w-[50vw] h-screen">
           <Image
             className="bg-[#F1D3CC] m-3 rounded-lg "
             src={knitting}

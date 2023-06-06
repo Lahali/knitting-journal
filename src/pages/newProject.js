@@ -36,15 +36,17 @@ const Newproject = () => {
 
   return (
     <>
-      <Navbar>New project</Navbar>
-      <div className="flex flex-col items-center justify-center h-screen ">
+      <div className="relative flex flex-col items-center justify-center h-screen mb-5 overflow-auto">
+        <Navbar>New project</Navbar>
         <form
           onSubmit={handleSubmit(onSubmitProject)}
-          className="flex flex-col items-center justify-center bg-[#FFEEE7] py-5 w-4/6 rounded-lg"
+          className="absolute top-40 flex flex-col items-center justify-center w-5/6  bg-[#FFEEE7] lg:py-5 md:py-5 lg:w-4/6 md:w-4/6 rounded-lg"
         >
-          <h1 className="my-4 text-5xl">New Project</h1>
+          <h1 className="my-4 text-4xl font-bold lg:text-5xl md:text-5xl">
+            New Project
+          </h1>
           {/* ==> TITLE INPUT */}
-          <div className="flex flex-col w-4/6 gap-1 my-5">
+          <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
             <label htmlFor="title">Name your project</label>
             <input
               placeholder="title"
@@ -58,7 +60,7 @@ const Newproject = () => {
             {errors.title && <p className="text-red-500">Title is required</p>}
           </div>
           {/* ==> SELECT INPUT */}
-          <div className="flex flex-col w-4/6 gap-1 my-5">
+          <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
             <label htmlFor="technique">Choose your technique</label>
             <select
               id="technique"
@@ -77,7 +79,7 @@ const Newproject = () => {
             )}
           </div>
           {/* ==> YARN INPUT  */}
-          <div className="flex flex-col w-4/6 gap-1 my-5">
+          <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
             <label htmlFor="yarn">Which yarn are you using?</label>
             <input
               placeholder="Yarn"
@@ -91,7 +93,7 @@ const Newproject = () => {
             {errors.yarn && <p className="text-red-500">Yarn is required</p>}
           </div>
           {/* ==> NEEDLES INPUT */}
-          <div className="flex flex-col w-4/6 gap-1 my-5">
+          <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
             <label htmlFor="needles">Which needles are you using?</label>
             <input
               placeholder="Needles"
@@ -107,7 +109,7 @@ const Newproject = () => {
             )}
           </div>
           {/* ==> NOTES TEXTAREA */}
-          <div className="flex flex-col w-4/6 gap-1 my-5">
+          <div className="flex flex-col w-4/6 gap-1 my-5 text-2xl lg:text-3xl md:text-3xl">
             <label htmlFor="notes">Add some notes</label>
             <textarea
               placeholder="notes"

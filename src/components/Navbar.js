@@ -12,7 +12,7 @@ const Navbar = ({ children }) => {
     router.push("/")
   }
   return (
-    <div className="fixed flex-row flex top-0 w-full items-center justify-between p-6 bg-[#A3342C] text-[#FFEEE7]">
+    <div className="z-10 fixed flex-row flex top-0 w-full items-center justify-between p-6 bg-[#A3342C] text-[#FFEEE7]">
       <p>
         <GiYarn className="text-6xl" />
       </p>

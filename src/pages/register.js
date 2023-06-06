@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { useAuth } from "../context/authContext"
-import { useState } from "react"
 import { useRouter } from "next/router"
 
 const Register = () => {
@@ -12,16 +11,15 @@ const Register = () => {
     formState: { errors },
   } = useForm()
 
-  const [user, setUser] = useState()
-
   const router = useRouter()
 
   const handleSignup = handleSubmit(async (data) => {
     try {
-      if (!data.name || !data.email || data.password) {
+      if (!data.name || !data.email || !data.password) {
         return
       }
-      await signup(data.email, data.password)
+      await signup(data.email, data.password, data.name)
+      console.log(data)
       router.push("/myProjects")
     } catch (error) {
       console.log(error)
