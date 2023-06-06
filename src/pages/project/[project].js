@@ -7,7 +7,7 @@ import {
   updateDoc,
 } from "firebase/firestore"
 import React, { useState } from "react"
-import { dataBase, app } from "../../../lib/firebase"
+import { dataBase } from "../../../lib/firebase"
 import { useRouter } from "next/router"
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi"
 import crochetIlustration from "../../assets/images/Crochet-pana.svg"
@@ -109,7 +109,7 @@ const Project = ({ singleProject }) => {
             <span className="font-bold">Notes:</span> {singleProject.notes}
           </p>
           <button
-            onClick={deleteProject}
+            onClick={() => setOpenModal(true)}
             className="bg-[#A3342C] text-[#FFEEE7] p-3 mt-5 rounded w-full  hover:bg-[#7C2923] text-3xl"
           >
             Delete
