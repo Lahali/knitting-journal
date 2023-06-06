@@ -9,7 +9,7 @@ const ProjectCard = ({ title, technique, id }) => {
       onClick={() => router.push(`/project/${id}`)}
       className="p-6 border border-[#FFEEE7] bg-[#FFEEE7] h-fit min-w-[126px] md:min-w-[185px] lg:min-w-[185px] m-4 cursor-pointer rounded-md"
     >
-      <h1 className="text-4xl font-semibold">{title}</h1>
+      <h1 className="text-3xl font-semibold uppercase">{title}</h1>
       <p>{technique}</p>
     </div>
   )

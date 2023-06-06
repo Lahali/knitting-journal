@@ -1,38 +1,24 @@
 import Image from "next/image"
-import { withAuth } from "@component/utils/withAuth"
 import Link from "next/link"
+import { withAuth } from "@component/utils/withAuth"
 import { getDocs } from "firebase/firestore"
 import { projectsRef } from "../../lib/firebase"
 import { useAuth } from "@component/context/authContext"
-import { useRouter } from "next/router"
 import ProjectCard from "@component/components/ProjectCard"
+import Navbar from "@component/components/Navbar"
 import knitting from "../assets/images/Knitting-pana.svg"
 import { HiOutlinePlus } from "react-icons/hi"
-import { FiLogOut } from "react-icons/fi"
 
 const MyProjects = ({ projects }) => {
-  const { currentUser, logout } = useAuth()
-  const router = useRouter()
+  const { currentUser } = useAuth()
+
   const filteredProjects = currentUser
     ? projects.filter((pro) => pro.userId === currentUser.uid)
     : []
 
-  const handleLogout = async () => {
-    await logout()
-    router.push("/")
-  }
-
   return (
     <>
-      <div className="flex flex-row items-center justify-between p-6 ">
-        <h1 className="text-4xl font-semibold lg:text-5xl">Your projects</h1>
-        <button
-          onClick={handleLogout}
-          className="w-fit bg-[#A3342C] text-[#FFEEE7] p-3 my-3 rounded  hover:bg-[#7C2923] text-2xl md:text-3xl lg:text-3xl"
-        >
-          <FiLogOut className="text-3xl" />
-        </button>
-      </div>
+      <Navbar>Your projects</Navbar>
       <div className="flex flex-row max-h-screen p-8 ">
         <div className="relative flex flex-col w-screen md:w-[50vw] lg:w-[50vw]">
           <div className="flex flex-wrap max-h-[530px] lg:max-h-screen md:max-h-screen overflow-auto">
@@ -59,12 +45,13 @@ const MyProjects = ({ projects }) => {
             <HiOutlinePlus />
           </Link>
         </div>
-        <div className="hidden md:flex lg:flex flex-col items-center justify-center w-[50vw]">
+        <div className="hidden md:flex lg:flex flex-col items-center justify-center w-[50vw] ">
           <Image
+            className="bg-[#F1D3CC] m-3 rounded-lg "
             src={knitting}
             alt="knittin ilustration"
-            width={300}
-            height={400}
+            width={400}
+            height={500}
           />
           <a className="text-sm" href="https://storyset.com/people">
             People illustrations by Storyset
