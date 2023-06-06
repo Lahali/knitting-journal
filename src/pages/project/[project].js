@@ -1,10 +1,10 @@
+import Image from "next/image"
 import { doc, getDoc, updateDoc } from "firebase/firestore"
 import React, { useState } from "react"
 import { dataBase } from "../../../lib/firebase"
 import { useRouter } from "next/router"
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi"
-
-import Image from "next/image"
+import crochetIlustration from "../../assets/images/Crochet-pana.svg"
 
 const Project = ({ singleProject }) => {
   const { query } = useRouter()
@@ -29,10 +29,22 @@ const Project = ({ singleProject }) => {
   }
 
   return (
-    <div className="flex flex-row p-5 max-w-[400px]">
-      <div className="flex flex-col bg-[#F1D3CC] p-6 rounded-md">
+    <div className="flex flex-row items-center justify-between h-screen p-5">
+      <div className="hidden p-10 bg-[#FFEEE7] lg:flex md:flex rounded-full w-fit flex-col  border-[#A5C08B] border-solid border-8">
+        <Image
+          src={crochetIlustration}
+          alt="crochet ilustration"
+          width={400}
+          height={400}
+          className="m-10"
+        />
+        <a className="text-sm text-center" href="https://storyset.com/people">
+          People illustrations by Storyset
+        </a>
+      </div>
+      <div className="flex flex-col bg-[#F1D3CC] p-10 rounded-md max-w-[400px] border-solid border-[#A3342C] border-8">
         <div className="flex flex-col items-center justify-center">
-          <div className="flex justify-center bg-[#FFEEE7] p-10 rounded-full  w-[80px] h-[80px] my-4">
+          <div className="flex justify-center items-center bg-[#FFEEE7] p-20 rounded-full  w-[80px] h-[80px] my-4">
             <h1 className="text-5xl">
               {singleProject.counter > 0 ? singleProject.counter : counter}
             </h1>

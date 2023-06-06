@@ -9,9 +9,10 @@ import ProjectCard from "@component/components/ProjectCard"
 import knitting from "../assets/images/Knitting-pana.svg"
 import { HiOutlinePlus } from "react-icons/hi"
 import { FiLogOut } from "react-icons/fi"
+import { useEffect } from "react"
 
 const MyProjects = ({ projects }) => {
-  const { currentUser, logout } = useAuth()
+  const { currentUser, logout, loading } = useAuth()
   const router = useRouter()
   const filteredProjects = currentUser
     ? projects.filter((pro) => pro.userId === currentUser.uid)
@@ -38,23 +39,13 @@ const MyProjects = ({ projects }) => {
           <div className="flex flex-wrap max-h-[530px] lg:max-h-screen md:max-h-screen overflow-auto">
             {filteredProjects && currentUser ? (
               filteredProjects.map((pro) => (
-                <>
-                  {/* <div
-                  onClick={() => router.push(`/project/${pro.id}`)}
-                  className="p-3 border border-[#D9D9D9] bg-[#D9D9D9] w-fit m-4 cursor-pointer"
-                  key={pro.id}
-                >
-                  <p>Title: {pro.title}</p>
-                  <p>Technique: {pro.technique}</p>
-                  <p>Yarn: {pro.yarn}</p>
-                  <p>Needles: {pro.needles}</p>
-                </div> */}
+                <div key={pro.id}>
                   <ProjectCard
                     title={pro.title}
                     technique={pro.technique}
                     id={pro.id}
                   />
-                </>
+                </div>
               ))
             ) : (
               <Link href="/newProject">
@@ -85,7 +76,7 @@ const MyProjects = ({ projects }) => {
   )
 }
 
-export default MyProjects
+export default withAuth(MyProjects)
 
 export const getServerSideProps = async (context) => {
   const querySnapshot = await getDocs(projectsRef)
