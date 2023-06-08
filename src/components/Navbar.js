@@ -1,4 +1,5 @@
 import { useAuth } from "@component/context/authContext"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
 import { FiLogOut } from "react-icons/fi"
@@ -13,10 +14,10 @@ const Navbar = ({ children }) => {
   }
   return (
     <div className="z-10 fixed flex-row flex top-0 w-full items-center justify-between p-6 bg-[#A3342C] text-[#FFEEE7]">
-      <p>
+      <Link href="/myProjects">
         <GiYarn className="text-6xl" />
-      </p>
-      <p>{children}</p>
+      </Link>
+      <p className="font-bold uppercase">{children}</p>
       <button
         onClick={handleLogout}
         className="w-fit bg-[#A3342C] text-[#FFEEE7] p-3 my-3 rounded  hover:bg-[#7C2923] text-2xl md:text-3xl lg:text-3xl"

@@ -9,8 +9,11 @@ const Modal = ({ isOpenModal, closeModal, deleteProject }) => {
         }`}
       >
         <div className="p-8 bg-[#FFEEE7] rounded-md m-5">
-          <p>You are about to delete your project permanently</p>
-          <p>Are you sure you want to continue?</p>
+          <p className="text-3xl leading-10 lg:text-4xl">
+            You are about to delete your project permanently. Are you sure you
+            want to continue?
+          </p>
+
           <div className="flex flex-row justify-between my-5">
             <button
               onClick={closeModal}

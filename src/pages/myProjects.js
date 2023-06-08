@@ -19,11 +19,11 @@ const MyProjects = ({ projects }) => {
 
   return (
     <>
+      <Navbar>Your projects</Navbar>
       <div className="relative flex flex-row max-h-screen">
-        <Navbar>Your projects</Navbar>
         <div className="absolute lg:relative md:relative justify-center flex flex-col w-screen md:w-[50vw] lg:w-[50vw]  top-20 p-8">
           <div className=" flex flex-wrap max-h-[530px] mt-5 lg:max-h-screen md:max-h-screen overflow-auto">
-            {filteredProjects && currentUser ? (
+            {filteredProjects &&
               filteredProjects.map((pro) => (
                 <div key={pro.id}>
                   <ProjectCard
@@ -32,16 +32,11 @@ const MyProjects = ({ projects }) => {
                     id={pro.id}
                   />
                 </div>
-              ))
-            ) : (
-              <Link href="/newProject">
-                <p>Add some project</p>
-              </Link>
-            )}
+              ))}
           </div>
           <Link
             href="/newProject"
-            className="bg-[#A3342C] text-[#FFEEE7] p-3 w-fit rounded-md ml-3 sticky "
+            className="bg-[#A3342C] text-[#FFEEE7] p-3 w-fit rounded-md ml-3 sticky"
           >
             <HiOutlinePlus />
           </Link>

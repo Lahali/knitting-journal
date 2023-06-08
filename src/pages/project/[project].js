@@ -48,7 +48,7 @@ const Project = ({ singleProject }) => {
   }
 
   return (
-    <div className="flex flex-row items-center justify-between h-screen ">
+    <div className="flex flex-row items-center justify-center h-screen mt-3 md:justify-around lg:justify-around">
       <Navbar>{singleProject.title}</Navbar>
       <Modal
         isOpenModal={openModal}
@@ -67,7 +67,10 @@ const Project = ({ singleProject }) => {
           People illustrations by Storyset
         </a>
       </div>
+
+      {/* CARD */}
       <div className="flex flex-col bg-[#F1D3CC] p-10 rounded-md max-w-[400px] border-solid border-[#A3342C] border-8 mx-3">
+        {/* COUNTER */}
         <div className="flex flex-col items-center justify-center">
           <div className="flex justify-center items-center bg-[#FFEEE7] p-20 rounded-full  w-[80px] h-[80px] my-4">
             <h1 className="text-5xl">
@@ -93,6 +96,7 @@ const Project = ({ singleProject }) => {
             </button>
           </div>
         </div>
+        {/* INFO */}
         <div className="m-5">
           <p className="my-5 font-bold text-center uppercase">
             {singleProject.title}
