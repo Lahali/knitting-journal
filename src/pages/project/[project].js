@@ -6,7 +6,7 @@ import {
   getFirestore,
   updateDoc,
 } from "firebase/firestore"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { dataBase } from "../../../lib/firebase"
 import { useRouter } from "next/router"
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi"
@@ -16,7 +16,6 @@ import Navbar from "@component/components/Navbar"
 
 const Project = ({ singleProject }) => {
   const { query } = useRouter()
-  const [counter, setCounter] = useState(0)
   const router = useRouter()
   // ==> MODAL ACTION
   const [openModal, setOpenModal] = useState(false)
@@ -30,23 +29,36 @@ const Project = ({ singleProject }) => {
     router.push("/myProjects")
   }
 
+  const [projectData, setProjectData] = useState(singleProject)
+
   // ==> COUNTER
   const handleIncrease = async () => {
     if (query.project) {
       const projectDocRef = doc(dataBase, "projects", query.project)
-      await updateDoc(projectDocRef, { counter: counter + 1 })
-      setCounter(counter + 1)
+      await updateDoc(projectDocRef, { counter: projectData.counter + 1 })
+      setProjectData({ ...projectData, counter: projectData.counter + 1 })
     }
   }
 
   const handleDecrease = async () => {
-    if (query.project && counter > 0) {
+    if (query.project && projectData.counter > 0) {
       const projectDocRef = doc(dataBase, "projects", query.project)
-      await updateDoc(projectDocRef, { counter: counter - 1 })
-      setCounter(counter - 1)
+      await updateDoc(projectDocRef, { counter: projectData.counter - 1 })
+      setProjectData({ ...projectData, counter: projectData.counter - 1 })
     }
   }
-  console.log("counter", counter)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const docRef = doc(dataBase, "projects", query.project)
+      const docSnap = await getDoc(docRef)
+      const initialSingleProject = docSnap.data()
+      if (initialSingleProject) {
+        setProjectData(initialSingleProject)
+      }
+    }
+    fetchData()
+  }, [query.project])
 
   return (
     <div className="flex flex-row items-center justify-center h-screen mt-3 md:justify-around lg:justify-around">
@@ -74,7 +86,7 @@ const Project = ({ singleProject }) => {
         {/* COUNTER */}
         <div className="flex flex-col items-center justify-center">
           <div className="flex justify-center items-center bg-[#FFEEE7] p-20 rounded-full  w-[80px] h-[80px] my-4">
-            <h1 className="text-5xl">{counter}</h1>
+            <h1 className="text-5xl">{projectData.counter}</h1>
           </div>
           <div className="flex flex-row justify-between">
             <button
