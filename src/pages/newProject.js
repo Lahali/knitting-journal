@@ -26,6 +26,7 @@ const Newproject = () => {
       await addDoc(projectsRef, {
         ...data,
         userId: currentUser.uid,
+        counter: 0,
       })
       router.push("/myProjects")
       reset()
