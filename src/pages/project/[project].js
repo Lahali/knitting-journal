@@ -46,6 +46,7 @@ const Project = ({ singleProject }) => {
       setCounter(counter - 1)
     }
   }
+  console.log("counter", counter)
 
   return (
     <div className="flex flex-row items-center justify-center h-screen mt-3 md:justify-around lg:justify-around">
@@ -73,9 +74,7 @@ const Project = ({ singleProject }) => {
         {/* COUNTER */}
         <div className="flex flex-col items-center justify-center">
           <div className="flex justify-center items-center bg-[#FFEEE7] p-20 rounded-full  w-[80px] h-[80px] my-4">
-            <h1 className="text-5xl">
-              {singleProject.counter > 0 ? singleProject.counter : counter}
-            </h1>
+            <h1 className="text-5xl">{counter}</h1>
           </div>
           <div className="flex flex-row justify-between">
             <button
